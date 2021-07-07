@@ -31,14 +31,14 @@
 
 - belongs_to :user
 - belongs_to :item
-- has_one :order
+- has_one :address
 
 ## itemsテーブル
 
 | Column                      | Type      | Options                        | 
 | ------------------------    | -------   | ------------------------------ | 
 | user                        |references | null: false, foreign_key: true |
-| item_name                   | string    | null: false                    | 
+| name                        | string    | null: false                    | 
 | item_info                   | text      | null: false                    | 
 | item_category_id            | integer   | null: false                    | 
 | item_sales_status_id        | integer   | null: false                    | 
@@ -50,12 +50,14 @@
 ### Association
 
 - belongs_to :user
-- has_one :purchase
+- has_one :address
 
-## ordersテーブル
+## addressesテーブル
 
 | Column          | Type       | Options                           | 
 | ------------    | -------    | -----------                       | 
+| user            | references | null: false, foreign_key: true    |
+| item            | references | null: false, foreign_key: true    |
 | postal_code     | string     | null :false                       | 
 | prefecture_id   | integer    | null :false                       | 
 | city            | string     | null :false                       | 
