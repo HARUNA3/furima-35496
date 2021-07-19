@@ -18,5 +18,8 @@ class Item < ApplicationRecord
       validates :item_scheduled_delivery_id
     end
   end
-  validates :item_price numericality: { 300-9999999 }
+  #validates :item_price numericality: { 300..9999999 }
+
+  belongs_to :user
+  has_one_attached :image
 end
