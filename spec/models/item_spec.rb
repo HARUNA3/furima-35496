@@ -66,6 +66,11 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefecture can't be blank")
       end
+      it "prefecture_idが1だと登録できない" do
+        @item.prefecture_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Prefecture must be other than 1")
+      end
       it "item_scheduled_delivery_idが空だと登録できない" do
         @item.item_scheduled_delivery_id = ''
         @item.valid?

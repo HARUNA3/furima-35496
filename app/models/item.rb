@@ -9,10 +9,10 @@ class Item < ApplicationRecord
   with_options presence: true do
     validates :user
     validates :image
-    validates :name,       length: { maximum: 40 }
-    validates :item_info,  length: { maximum: 1000 }
-    validates :prefecture_id
+    validates :name
+    validates :item_info
     with_options numericality: { other_than: 1 } do
+      validates :prefecture_id
       validates :item_category_id
       validates :item_sales_status_id
       validates :item_shipping_fee_status_id
