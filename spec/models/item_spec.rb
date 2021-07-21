@@ -36,15 +36,30 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Item category can't be blank")
       end
+      it "item_category_idが1だと登録できない" do
+        @item.item_category_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Item category must be other than 1")
+      end
       it "item_sales_status_idが空だと登録できない" do
         @item.item_sales_status_id = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Item sales status can't be blank")
       end
+      it "item_sales_status_idが1だと登録できない" do
+        @item.item_sales_status_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Item sales status must be other than 1")
+      end
       it "item_shipping_fee_status_idが空だと登録できない" do
         @item.item_shipping_fee_status_id = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Item shipping fee status can't be blank")
+      end
+      it "item_shipping_fee_status_idが1だと登録できない" do
+        @item.item_shipping_fee_status_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Item shipping fee status must be other than 1")
       end
       it "prefecture_idが空だと登録できない" do
         @item.prefecture_id = ''
@@ -56,8 +71,13 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Item scheduled delivery can't be blank")
       end
+      it "item_scheduled_delivery_idが1だと登録できない" do
+        @item.item_scheduled_delivery_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Item scheduled delivery must be other than 1")
+      end
       it "item_priceが空だと登録できない" do
-        @item.item_price = ''
+        @item.item_price = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Item price is not a number")
       end
@@ -75,6 +95,16 @@ RSpec.describe Item, type: :model do
         @item.item_price = '３３３'
         @item.valid?
         expect(@item.errors.full_messages).to include("Item price is not a number")
+      end
+      it "item_priceが文字混合では登録できない" do
+        @item.item_price = 'a123'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Item price is not a number")
+      end
+      it "user情報が無いと登録できない" do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("User must exist")
       end
     end
   end
