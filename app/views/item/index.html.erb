@@ -127,9 +127,8 @@
       新規投稿商品
     </div>
     <ul class='item-lists'>
-
-      <% @items.each do |item|  %>
-        <% if item.present? %>
+      <% if @items.present? %>
+        <% @items.each do |item|  %>
           <li class='list'>
             <%= link_to "#" do %>
             <div class='item-img-content'>
@@ -144,6 +143,7 @@
               <h3 class='item-name'>
                 <%= item.name %>
               </h3>
+              <%= link_to '削除', item_path(item.id), method: :delete %>
               <div class='item-price'>
                 <span><%= item.item_price %>円<br><%= item.item_shipping_fee_status.data %></span>
                 <div class='star-btn'>
@@ -154,7 +154,8 @@
             </div>
             <% end %>
           </li>
-        <% else %>
+        <% end %>
+      <% elsif %>
           <li class='list'>
             <%= link_to '#' do %>
             <%= image_tag "https://tech-master.s3.amazonaws.com/uploads/curriculums/images/Rails1-4/sample.jpg", class: "item-img" %>
@@ -170,19 +171,12 @@
                 </div>
               </div>
             </div>
-          </li>
             <% end %>
-        <% end %>
+          </li>
       <% end %>
-
-      <%# 商品がない場合は以下のダミー商品が表示されるようにしましょう %>
-      <%# 商品がある場合は表示されないようにしましょう %>
-      <%# //商品がある場合は表示されないようにしましょう %>
-      <%# //商品がない場合は以下のダミー商品が表示されるようにしましょう %>
     </ul>
   </div>
   <%# /商品一覧 %>
-</div>
 <% if user_signed_in? %>
   <%= link_to( new_item_path, class: 'purchase-btn') do %>
     <span class='purchase-btn-text'>出品する</span>
